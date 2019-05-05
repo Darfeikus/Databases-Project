@@ -1,0 +1,44 @@
+<!-- <div class="col-sm-2">
+					<a href="" data-toggle="modal" data-target="#<?php echo $row['id'] ?>" class="btn btn-info btn">Editar</a>
+				</div>
+
+                <div id="<?php echo $row['id'] ?>" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Cliente</h4>
+                            </div>
+                            <div class="modal-body">
+                                <?php 
+                                    $sql = 'SELECT * FROM `Clientes` WHERE `id` = ?';
+                                    $q = $pdo->prepare($sql);
+                                    $q->execute(array($row['id']));
+                                    $data = $q->fetch(PDO::FETCH_ASSOC);
+                                    $d_nombre = $data['nombre'];
+                                    $d_clave = $data['clave'];
+                                    $d_direccion = $data['direccion'];
+                                    $d_telefono = $data['telefono'];
+                                ?>
+                                <form method="post" id="insert_form">
+                                <label>Clave del cliente</label>
+                                <input type="text" name="clave" id="clave" class="form-control" value="<?php echo !empty($d_clave)?$d_clave:''; ?>">
+                                <br/>
+                                <label>Nombre del Cliente</label>
+                                <input type="text" name="name" id="name" class="form-control" value="<?php echo !empty($d_nombre)?$d_nombre:''; ?>"/>
+                                <br />
+                                <label>Direccion del cliente</label>
+                                <input type="text" name="address" id="address" class="form-control" value="<?php echo !empty($d_direccion)?$d_direccion:''; ?>" />
+                                <br />  
+                                <label>Telefono del Cliente</label>
+                                <input type="text" name="phone" id="phone" class="form-control" value="<?php echo !empty($d_telefono)?$d_telefono:''; ?>"/>
+                                <br />
+                                <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
