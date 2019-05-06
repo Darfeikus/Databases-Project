@@ -6,7 +6,7 @@ require 'database.php';
 <!DOCTYPE html>  
 <html>  
  <head>  
-  <title>Compras</title>  
+  <title>Ventas</title>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -20,7 +20,7 @@ require 'database.php';
  <body>  
   <br /><br />  
   <div class="container" style="width:700px;">  
-   <h3 align="center" >Compras</h3>  
+   <h3 align="center" >Ventas</h3>  
    <br />  
    <div class="table-responsive">
     <div align="right">
@@ -33,12 +33,12 @@ require 'database.php';
     <div id="employee_table">
      <table class="table table-bordered">
       <tr>
-       <th width="20%">Proveedor</th>
+       <th width="20%">Cliente</th>
        <th width="20%">Fecha</th>
       </tr>
         <?php 
             $pdo = Database::connect();
-            $sql = 'SELECT p.nombre,prs.fecha from Proveedores p, Compras prs where prs.id_proveedor = p.id order by prs.fecha';
+            $sql = 'SELECT p.nombre,prs.fecha from Clientes p, Ventas prs where prs.id_cliente = p.id order by prs.fecha';
             foreach ($pdo->query($sql) as $row) {
                 echo '<tr>'; 	
                 echo '<td>'. $row['nombre'] . '</td>';
@@ -61,18 +61,18 @@ require 'database.php';
    <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-    <h4 class="modal-title">Agregar compra</h4>
+    <h4 class="modal-title">Agregar venta</h4>
    </div>
    
    <div class="modal-body">
-    <form method="post" id="insert_form" action = "insertCompraIndex.php">
+    <form method="post" id="insert_form" action = "insertVentaIndex.php">
    
-    <label>Selecciona un proveedor</label>
+    <label>Selecciona un cliente</label>
     <br>
     <select name ="proveedor" id="proveedor">
      <?php
         $pdo = Database::connect();
-        $query = 'SELECT * FROM Proveedores';
+        $query = 'SELECT * FROM Clientes';
         foreach ($pdo->query($query) as $row) {
             echo "<option value=" . $row['id'] . ">" . $row['nombre'] . "</option>";
         }
@@ -109,7 +109,7 @@ require 'database.php';
             <div class="modal-body">
 
                     <div class="col-sm-2">
-                        <a data-dismiss="modal" data-toggle="modal" href="" data-target="#clave-modal" class="btn btn-info btn-sm">Busqueda por proveedor</a>
+                        <a data-dismiss="modal" data-toggle="modal" href="" data-target="#clave-modal" class="btn btn-info btn-sm">Busqueda por cliente</a>
                         <br>
                         <br>
                         <a data-dismiss="modal" data-toggle="modal" href="" data-target="#nombre-modal" class="btn btn-info btn-sm">Busqueda por fecha</a>
@@ -128,15 +128,15 @@ require 'database.php';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Busqueda por proveedor</h4>
+                <h4 class="modal-title">Busqueda por cliente</h4>
             </div>
             <div class="modal-body">
             <form method="post" id="search_form">
-                <label>Seleccione el proveedor</label>
+                <label>Seleccione el cliente</label>
                 <select name ="s_clave" id="s_clave">
                 <?php
                     $pdo = Database::connect();
-                    $query = 'SELECT * FROM Proveedores';
+                    $query = 'SELECT * FROM Clientes';
                     foreach ($pdo->query($query) as $row) {
                         echo "<option value=" . $row['id'] . ">" . $row['nombre'] . "</option>";
                     }
@@ -187,7 +187,7 @@ require 'database.php';
   <div class="modal-content">
    <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Informacion del compra</h4>
+    <h4 class="modal-title">Informacion del venta</h4>
    </div>
    <div class="modal-body" id="data-compra">
     
@@ -212,11 +212,11 @@ $(document).ready(function(){
         var clave_id = $("#s_clave").val();
         var opc = '0';
         if(clave_id==''){
-            alert("Se requiere una proveedor")
+            alert("Se requiere una cliente")
         }
         else{
             $.ajax({
-                url:"searchCompra.php",
+                url:"searchVenta.php",
                 method:"POST",
                 data:{clave_id:clave_id,opc:opc},
                 success:function(data){
@@ -234,7 +234,7 @@ $(document).ready(function(){
         }
         else
         $.ajax({
-                url:"searchCompra.php",
+                url:"searchVenta.php",
                 method:"POST",
                 data:{clave_id:clave_id,opc:opc},
                 success:function(data){

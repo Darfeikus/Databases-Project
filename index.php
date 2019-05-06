@@ -21,6 +21,9 @@ require 'database.php';
      <a href="Clientes.php"  class="btn btn-info">Clientes</a>
      <a href="Proveedores.php"   class="btn btn-info">Proveedores</a>
      <a href="Compras.php"   class="btn btn-info">Compras</a>
+     <a href="Ventas.php"   class="btn btn-info">Ventas</a>
+     <a href="Productos.php"   class="btn btn-info">Productos</a>
+     <a href="Consultas.php"   class="btn btn-info">Consultas</a>
     </div>
     <br />
     

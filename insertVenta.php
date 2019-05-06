@@ -27,7 +27,7 @@ if ( !empty($_POST)) {
     $valid = true;
     
     if (empty($producto)) {
-        $productoError = 'Por favor selecciona una producto';
+        $productoError = 'Por favor selecciona un cliente';
         $valid = false;
     }
     
@@ -52,11 +52,11 @@ if ( !empty($_POST)) {
         var_dump($_POST);
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO `HistorialCompras`(`id_compra`, `id_producto`, `costoPrevio`, `porcentajeDescuento`, `costoNeto`) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO `HistorialVentas`(`id_venta`, `id_producto`, `precioPrevio`, `procentajeDescuento`, `precioNeto`) VALUES (?,?,?,?,?)";
         $q = $pdo->prepare($sql);
         $q->execute(array($id_P,$producto,$modelo,$pantalla,$ram));
         Database::disconnect();
-        header("Location: insertCompra.php?id=$id_P & message=Producto Agregado");
+        header("Location: insertVenta.php?id=$id_P & message=Producto Agregado");
     }
 }
 ?>
@@ -74,21 +74,21 @@ if ( !empty($_POST)) {
 <div class="container">
 <div class="span10 offset1">
 <div class="row">
-    <h3>Agregar productos a la compra</h3>
+    <h3>Agregar productos a la venta</h3>
     <p><?php echo $message ?></p>
 </div>
 
-<form class="form-horizontal" action="insertCompra.php" method="post">
+<form class="form-horizontal" action="insertVenta.php" method="post">
 
 <div class ="control-group">
 <input type = "hidden" name="id" id="id" type="text" value="<?php echo !empty($id) ? $id:$id_P;?>" readonly>
 </div>
 
 <div class="control-group <?php echo !empty($productoError)?'error':'';?>">
-<label class="control-label">Producto</label>
+<label class="control-label">Cliente</label>
 <div class="controls">
 <select name ="producto">
-<option value="">Selecciona una producto</option>
+<option value="">Selecciona un cliente</option>
 <?php
 $pdo = Database::connect();
 $query = 'SELECT * FROM Productos';
@@ -111,9 +111,9 @@ Database::disconnect();
 
 <div class="control-group <?php echo !empty($modeloError)?'error':'';?>">
 
-<label class="control-label">Costo Previo</label>
+<label class="control-label">Precio Previo</label>
 <div class="controls">
-<input name="modelo" id="modelo" type="text" placeholder="Costo Previo" value="<?php echo !empty($modelo)?$modelo:'';?>">
+<input name="modelo" id="modelo" type="text" placeholder="Precio Previo" value="<?php echo !empty($modelo)?$modelo:'';?>">
 <?php if (!empty($modeloError)): ?>
 <span class="help-inline"><?php echo $modeloError;?></span>
 <?php endif;?>
@@ -133,7 +133,7 @@ Database::disconnect();
 
 <div class="control-group <?php echo !empty($ramError)?'error':'';?>">
 
-<label class="control-label">Costo Neto</label>
+<label class="control-label">Precio Neto</label>
 <div class="controls">
 <input name="ram" id="ram" type="text" placeholder="costo" value="<?php echo !empty($ram)?$ram:'';?>"  readonly>
 <?php if (!empty($ramError)): ?>
