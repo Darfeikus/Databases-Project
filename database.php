@@ -1,6 +1,6 @@
 <?php
 	class Database {
-		private static $dbName 			= 'Auto_Raco' ; 
+		private static $dbName 			= 'Test' ; 
 		private static $dbHost 			= 'localhost' ;
 		private static $dbUsername 		= 'root';
 		private static $dbUserPassword 	= '';
