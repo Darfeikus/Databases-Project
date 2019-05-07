@@ -36,11 +36,6 @@ if ( !empty($_POST)) {
         $valid = false;
     }
     
-    if (empty($pantalla)) {
-        $pantallaError = 'Por favor escribe la cantidad de descuento.';
-        $valid = false;
-    }
-    
     if (empty($ram)) {
         $ramError = 'Por favor escribe costo neto';
         $valid = false;
@@ -113,7 +108,7 @@ Database::disconnect();
 
 <label class="control-label">Costo Previo</label>
 <div class="controls">
-<input name="modelo" id="modelo" type="text" placeholder="Costo Previo" value="<?php echo !empty($modelo)?$modelo:'';?>">
+<input name="modelo" id="modelo" type="text" placeholder="Costo Previo" value="<?php echo !empty($modelo)?$modelo:'';?>" onfocusout="change()">
 <?php if (!empty($modeloError)): ?>
 <span class="help-inline"><?php echo $modeloError;?></span>
 <?php endif;?>
@@ -144,7 +139,7 @@ Database::disconnect();
 
 <div class="form-actions">
 <button type="submit" class="btn btn-success">Agregar</button>
-<a class="btn" href="index.php">Regresar</a>
+<a class="btn" href="Compras.php">Regresar</a>
 </div>
 
 </form>
@@ -157,7 +152,10 @@ Database::disconnect();
 <script>
 
     function change(){
-        document.getElementById("ram").value = parseInt(document.getElementById("modelo").value,10) - parseInt(document.getElementById("modelo").value,10)*(parseInt(document.getElementById("pantalla").value,10)*0.01);
+        if(document.getElementById("pantalla")!=null)
+            document.getElementById("ram").value = parseInt(document.getElementById("modelo").value,10) - parseInt(document.getElementById("modelo").value,10)*(parseInt(document.getElementById("pantalla").value,10)*0.01);
+        else
+            document.getElementById("ram").value = parseInt(document.getElementById("modelo").value,10);
     }
 
 </script>

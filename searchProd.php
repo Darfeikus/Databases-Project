@@ -2,7 +2,7 @@
     require "database.php";
     $pdo = Database::connect();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    if($_POST['opc'] == '0')
+    if($_POST['opc'] == '0'){
         if(isset($_POST['clave_id'])){
             $clave =  $_POST["clave_id"]; 
             $sql = "SELECT * FROM `Productos` WHERE `clave` = '$clave'";
@@ -33,12 +33,11 @@
                 echo '</tr>';
             }
         }
-        else
-            echo "Not Found";
-    else if ($_POST['opc']=='2')
+    }
+    else if ($_POST['opc']=='1'){
         if(isset($_POST['clave_id'])){
             $clave =  $_POST["clave_id"]; 
-            $sql = "SELECT * FROM `Productos` WHERE `ultimaVenta` = '$clave'";
+            $sql = "SELECT * FROM `Productos` WHERE `ultimaCompra` = '$clave'";
             ?>
             <tr>
             <th width="5%">Clave</th>
@@ -64,12 +63,13 @@
                 ?>
                 <?php
                 echo '</tr>';
-            }
+            }    
         }
-        else if ($_POST['opc']=='1')
+    }
+    else if ($_POST['opc']=='2')
         if(isset($_POST['clave_id'])){
             $clave =  $_POST["clave_id"]; 
-            $sql = "SELECT * FROM `Productos` WHERE `ultimaCompra` = '$clave'";
+            $sql = "SELECT * FROM `Productos` WHERE `ultimaVenta` = '$clave'";
             ?>
             <tr>
             <th width="5%">Clave</th>

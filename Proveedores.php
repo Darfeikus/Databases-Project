@@ -41,10 +41,13 @@ require 'database.php';
                 echo '<td>'. $row['nombre'] . '</td>';
                 echo '<td>'. $row['direccion'] . '</td>';
                 echo '<td>'. $row['telefono'] . '</td>';
-                // echo '<td width=250>';
-                // echo '<a class="btn" href="read.php?id='.$row['id'].'">Detalles</a>';
-                // echo '&nbsp;';
-                // echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Actualizar</a>';
+                echo '<td width=250>';
+                echo '<a class="btn" href="readP.php?id='.$row['id'].'">Detalles</a>';
+                echo '&nbsp;';
+                echo '<a class="btn btn-success" href="updateP.php?id='.$row['id'].'">Actualizar</a>';
+                echo '&nbsp;';
+                echo '<br><br>';
+                echo '<a class="btn btn-danger" href="deleteP.php?id='.$row['id'].'">Eliminar</a>';
                 ?>
                 <?php
                 echo '</tr>';

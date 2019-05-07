@@ -33,14 +33,14 @@ require 'database.php';
     <div id="employee_table">
      <table class="table table-bordered">
       <tr>
-       <th width="5%">Clave</th>
-       <th width="20%">Descripcion</th>
-       <th width="5%">Costo Promedio</th>
-       <th width="5%">Costo Ultimo</th>
-       <th width="30%">Ultima Compra</th>
-       <th width="5%">Precio Promedio</th>
-       <th width="5%">Precio Ultimo</th>
-       <th width="30%">Ultima Venta</th>
+       <th ">Clave</th>
+       <th ">Descripcion</th>
+       <th ">Costo Promedio</th>
+       <th ">Costo Ultimo</th>
+       <th ">Ultima Compra</th>
+       <th ">Precio Promedio</th>
+       <th ">Precio Ultimo</th>
+       <th ">Ultima Venta</th>
       </tr>
         <?php 
             $pdo = Database::connect();
@@ -55,6 +55,12 @@ require 'database.php';
                 echo '<td>'. $row['precioPromedio'] . '</td>';
                 echo '<td>'. $row['precioUltimo'] . '</td>';
                 echo '<td>'. $row['ultimaVenta'] . '</td>';
+                echo '<td>';
+                echo '<a class="btn btn-success" href="updateProd.php?id='.$row['id'].'">Actualizar</a>';
+                echo '&nbsp;';
+                echo '<br><br>';
+                echo '<a class="btn btn-danger" href="deleteProd.php?id='.$row['id'].'">Eliminar</a>';
+                echo '</tr>';
                 ?>
                 <?php
                 echo '</tr>';

@@ -34,8 +34,6 @@
                 echo '<td width = "10%">'. $row['porcentajeDescuento'] . '</td>';
                 echo '<td width = "10%">'. $row['costoNeto'] . '</td>';
                 echo '<td width = "30%">'. $row['fecha'] . '</td>';
-                ?>
-                <?php
                 echo '</tr>';
             }
         }

@@ -35,16 +35,19 @@ require 'database.php';
       <tr>
        <th width="20%">Cliente</th>
        <th width="20%">Fecha</th>
+       <th width="40%"></th>
       </tr>
         <?php 
             $pdo = Database::connect();
-            $sql = 'SELECT p.nombre,prs.fecha from Clientes p, Ventas prs where prs.id_cliente = p.id order by prs.fecha';
+            $sql = 'SELECT p.id,prs.id id_venta,p.nombre,prs.fecha from Clientes p, Ventas prs where prs.id_cliente = p.id order by prs.fecha';
             foreach ($pdo->query($sql) as $row) {
                 echo '<tr>'; 	
                 echo '<td>'. $row['nombre'] . '</td>';
                 echo '<td>'. $row['fecha'] . '</td>';
-                ?>
-                <?php
+                echo '<td >';
+                echo '<a class="btn" href="readVe.php?id='.$row['id'].'&id_venta='.$row['id_venta'].'">Detalles (Editar)</a>';
+                echo '&nbsp;';
+                echo '<a class="btn btn-danger" href="deleteVe.php?id='.$row['id_venta'].'">Eliminar</a>';
                 echo '</tr>';
             }
             Database::disconnect();

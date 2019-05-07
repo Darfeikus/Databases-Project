@@ -27,17 +27,12 @@ if ( !empty($_POST)) {
     $valid = true;
     
     if (empty($producto)) {
-        $productoError = 'Por favor selecciona un cliente';
+        $productoError = 'Por favor selecciona un Producto';
         $valid = false;
     }
     
     if (empty($modelo)) {
         $modeloError = 'Por favor escribe el costo original';
-        $valid = false;
-    }
-    
-    if (empty($pantalla)) {
-        $pantallaError = 'Por favor escribe la cantidad de descuento.';
         $valid = false;
     }
     
@@ -52,7 +47,7 @@ if ( !empty($_POST)) {
         var_dump($_POST);
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO `HistorialVentas`(`id_venta`, `id_producto`, `precioPrevio`, `procentajeDescuento`, `precioNeto`) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO `HistorialVentas`(`id_venta`, `id_producto`, `precioPrevio`, `porcentajeDescuento`, `precioNeto`) VALUES (?,?,?,?,?)";
         $q = $pdo->prepare($sql);
         $q->execute(array($id_P,$producto,$modelo,$pantalla,$ram));
         Database::disconnect();
@@ -85,10 +80,10 @@ if ( !empty($_POST)) {
 </div>
 
 <div class="control-group <?php echo !empty($productoError)?'error':'';?>">
-<label class="control-label">Cliente</label>
+<label class="control-label">Producto</label>
 <div class="controls">
 <select name ="producto">
-<option value="">Selecciona un cliente</option>
+<option value="">Selecciona un producto</option>
 <?php
 $pdo = Database::connect();
 $query = 'SELECT * FROM Productos';
@@ -113,7 +108,7 @@ Database::disconnect();
 
 <label class="control-label">Precio Previo</label>
 <div class="controls">
-<input name="modelo" id="modelo" type="text" placeholder="Precio Previo" value="<?php echo !empty($modelo)?$modelo:'';?>">
+<input name="modelo" id="modelo" type="text" placeholder="Precio Previo" value="<?php echo !empty($modelo)?$modelo:'';?>" onfocusout="change()">
 <?php if (!empty($modeloError)): ?>
 <span class="help-inline"><?php echo $modeloError;?></span>
 <?php endif;?>
@@ -144,7 +139,7 @@ Database::disconnect();
 
 <div class="form-actions">
 <button type="submit" class="btn btn-success">Agregar</button>
-<a class="btn" href="index.php">Regresar</a>
+<a class="btn" href="Ventas.php">Regresar</a>
 </div>
 
 </form>
@@ -157,7 +152,10 @@ Database::disconnect();
 <script>
 
     function change(){
-        document.getElementById("ram").value = parseInt(document.getElementById("modelo").value,10) - parseInt(document.getElementById("modelo").value,10)*(parseInt(document.getElementById("pantalla").value,10)*0.01);
+        if(document.getElementById("pantalla")!=null)
+            document.getElementById("ram").value = parseInt(document.getElementById("modelo").value,10) - parseInt(document.getElementById("modelo").value,10)*(parseInt(document.getElementById("pantalla").value,10)*0.01);
+        else
+            document.getElementById("ram").value = parseInt(document.getElementById("modelo").value,10);
     }
 
 </script>
